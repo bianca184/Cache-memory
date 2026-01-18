@@ -1,33 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.memorie.CacheController">
 
 
-<?import javafx.scene.control.Button?>
-
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.memorie.CacheController">
-    <center>
-    <VBox spacing="10" alignment="CENTER"> <Label text="Simulare memorie cache" style="-fx-font-size: 20px;"/>
-
-        <HBox spacing="10" alignment="CENTER">
-            <TextField fx:id="addressField" promptText="Introduceți adresa..."/>
-            <Button text="Citește din adresă" fx:id="readButton" onAction="#onRead"/>
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="card">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <Label text="Simulare memorie cache" styleClass="title"/>
+            <Label fx:id="modeLabel" text=""/>
         </HBox>
-        <TextArea fx:id="outputArea" prefRowCount="5" prefColumnCount="40"/>
-        <TableView fx:id="cacheTable" prefHeight="200" prefWidth="400">
-            <columns>
-                <TableColumn fx:id="indexColumn" text="Index" prefWidth="80"/>
-                <TableColumn fx:id="validColumn" text="Valid" prefWidth="80"/>
-                <TableColumn fx:id="tagColumn" text="Tag" prefWidth="80"/>
-                <TableColumn fx:id="dataColumn" text="Data" prefWidth="120"/>
-            </columns>
-        </TableView>
+    </top>
 
-    </VBox>
+
+    <left>
+        <VBox spacing="12" styleClass="card">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <Label text="Adresă de citit:"/>
+            <TextField fx:id="addressField" promptText="ex: 12"/>
+
+            <Button text="Citește adresă" onAction="#onRead"/>
+
+            <Separator/>
+
+            <Button fx:id="finishButton" text="Termină simularea" onAction="#onFinish"/>
+            <Button fx:id="resetButton" text="Reset" onAction="#onReset"/>
+        </VBox>
+    </left>
+
+
+    <center>
+        <VBox spacing="10">
+            <TableView fx:id="cacheTable" prefHeight="260">
+                <columns>
+                    <TableColumn fx:id="indexColumn" text="Index" prefWidth="60"/>
+                    <TableColumn fx:id="validColumn" text="Valid" prefWidth="70"/>
+                    <TableColumn fx:id="tagColumn" text="Tag" prefWidth="100"/>
+                    <TableColumn fx:id="dataColumn" text="Data" prefWidth="120"/>
+                </columns>
+            </TableView>
+        </VBox>
     </center>
+
+
+    <right>
+        <VBox spacing="10">
+
+
+            <VBox spacing="6" styleClass="card">
+                <Label text="Statistici" styleClass="subtitle"/>
+
+                <HBox spacing="6">
+                    <Label text="Accesări:"/>
+                    <Label fx:id="totalAccessLabel" text="0"/>
+                </HBox>
+
+                <HBox spacing="6">
+                    <Label text="HIT-uri:"/>
+                    <Label fx:id="hitLabel" text="0"/>
+                </HBox>
+
+                <HBox spacing="6">
+                    <Label text="MISS-uri:"/>
+                    <Label fx:id="missLabel" text="0"/>
+                </HBox>
+
+                <HBox spacing="6">
+                    <Label text="Hit rate:"/>
+                    <Label fx:id="hitRateLabel" text="0%"/>
+                </HBox>
+
+                <HBox spacing="6">
+                    <Label text="Durată:"/>
+                    <Label fx:id="durationLabel" text="0.00 s"/>
+                </HBox>
+            </VBox>
+
+
+            <VBox spacing="6" styleClass="card">
+                <Label text="Evictions (scoase din cache)" styleClass="subtitle"/>
+                <TextArea fx:id="evictionArea"
+                          prefRowCount="8"
+                          editable="false"
+                          wrapText="true"/>
+            </VBox>
+
+        </VBox>
+    </right>
+
+
+    <bottom>
+        <TextArea fx:id="outputArea" prefRowCount="4"/>
+    </bottom>
+
 </BorderPane>

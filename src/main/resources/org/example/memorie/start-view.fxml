@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.*?>
-<?import javafx.geometry.Insets?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.memorie.StartController"
-      alignment="CENTER" spacing="15">
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.memorie.StartController"
+      alignment="CENTER" spacing="12">
+
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <Label text="Alege tipul de simulare:" style="-fx-font-size: 18px;"/>
-    <Button text="Direct Mapped" onAction="#onDirectMapped"/>
-    <Button text="Fully Associative (FIFO)" onAction="#onFIFO"/>
+    <Label text="Simulare memorie cache" style="-fx-font-size: 18px;"/>
+
+    <Label text="Selectează modul:"/>
+    <ComboBox fx:id="modeBox">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Direct Mapped"/>
+                <String fx:value="Fully Associative (FIFO)"/>
+            </FXCollections>
+        </items>
+    </ComboBox>
+
+    <Label text="Dimensiune cache (putere a lui 2):"/>
+    <TextField fx:id="cacheSizeField" promptText="ex: 4, 8, 16..."/>
+
+    <Button text="Start simulare" onAction="#onStart"/>
+
 </VBox>

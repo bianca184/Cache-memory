@@ -14,6 +14,9 @@ public class CacheApp extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(CacheApp.class.getResource("start-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        scene.getStylesheets().add(
+                getClass().getResource("/styles/flat-ui.css").toExternalForm()
+        );
         stage.setTitle("Selecteaza modul de simulare");
         stage.setScene(scene);
         stage.show();
